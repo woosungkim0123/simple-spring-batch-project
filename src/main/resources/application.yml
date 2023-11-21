@@ -28,6 +28,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: '0000'
+
   batch:
     jdbc:
       initialize-schema: embedded
+    job:
+      enabled: false
