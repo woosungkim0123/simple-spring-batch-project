@@ -9,6 +9,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 
 @RequiredArgsConstructor
 @Component
@@ -20,8 +22,15 @@ public class JobRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
+        String version = args.containsOption("version")
+                ? args.getOptionValues("version").get(0)
+                : "1";
+
         JobParameters jobParameters = new JobParametersBuilder()
-                .addString("version", "2")
+                .addString("version", version)
+                .addLong("seq", 1L)
+                .addDate("time", new Date())
+                .addDouble("percent", 77.0)
                 .toJobParameters();
 
         jobLauncher.run(job, jobParameters);
