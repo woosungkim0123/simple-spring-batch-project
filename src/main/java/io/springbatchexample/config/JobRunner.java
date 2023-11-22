@@ -29,7 +29,7 @@ public class JobRunner implements ApplicationRunner {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addString("version", version)
                 .addLong("seq", 1L)
-                .addDate("time", new Date())
+                //.addDate("time", new Date())
                 .addDouble("percent", 77.0)
                 .toJobParameters();
 
