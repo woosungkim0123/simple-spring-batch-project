@@ -1,4 +1,4 @@
-package io.springbatchexample.config;
+package io.springbatchexample.config.basic.config;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
