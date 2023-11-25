@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * StepExecution은 apply를 통해 StepContribution의 내용을 업데이트함.
  */
 @RequiredArgsConstructor
-@Configuration
+//@Configuration
 public class StepContributionConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
