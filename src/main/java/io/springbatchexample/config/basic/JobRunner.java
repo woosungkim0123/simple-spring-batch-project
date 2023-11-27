@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 @RequiredArgsConstructor
-@Component
+//@Component
 public class JobRunner implements ApplicationRunner {
 
     private final JobLauncher jobLauncher;

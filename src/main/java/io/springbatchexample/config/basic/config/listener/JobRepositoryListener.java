@@ -6,7 +6,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@Component
+//@Component
 public class JobRepositoryListener implements JobExecutionListener {
     private final JobRepository jobRepository;
 

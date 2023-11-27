@@ -2,7 +2,6 @@ package io.springbatchexample.config.basic.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -12,18 +11,16 @@ import org.springframework.context.annotation.Configuration;
 
 
 @RequiredArgsConstructor
-//@Configuration
-public class JobRepositoryConfiguration {
+@Configuration
+public class JobLauncherConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    private final JobExecutionListener jobRepositoryListener;
 
     @Bean
     public Job job() {
         return jobBuilderFactory.get("job")
                 .start(step1())
                 .next(step2())
-                .listener(jobRepositoryListener)
                 .build();
     }
 

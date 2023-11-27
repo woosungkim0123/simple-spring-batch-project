@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 /**
  * BATCH 초기화시 JobRepository를 커스터마이징해서 등록함
  */
-@Configuration
+//@Configuration
 public class CustomBatchConfigurer extends BasicBatchConfigurer {
     private final DataSource dataSource;
 
