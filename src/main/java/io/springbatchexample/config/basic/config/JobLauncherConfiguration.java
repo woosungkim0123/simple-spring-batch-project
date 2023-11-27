@@ -27,7 +27,10 @@ public class JobLauncherConfiguration {
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .tasklet((contribution, chunkContext) -> RepeatStatus.FINISHED)
+                .tasklet((contribution, chunkContext) -> {
+                    Thread.sleep(1000 * 3);
+                    return RepeatStatus.FINISHED;
+                })
                 .build();
     }
 
