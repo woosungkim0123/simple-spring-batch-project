@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: local
+logging:
+  level:
+    root: info
 
 
 ---
@@ -15,7 +18,8 @@ spring:
     password:
   batch:
     jdbc:
-      initialize-schema: embedded
+      initialize-schema: always
+      isolation-level-for-create: default
 
 
 ---
@@ -32,5 +36,6 @@ spring:
   batch:
     jdbc:
       initialize-schema: embedded
+      isolation-level-for-create: default
     job:
-      enabled: false
+      names: ${job.name:NONE}
