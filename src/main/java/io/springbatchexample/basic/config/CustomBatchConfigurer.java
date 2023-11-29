@@ -1,4 +1,4 @@
-package io.springbatchexample.config.basic.config;
+package io.springbatchexample.basic.config;
 
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;

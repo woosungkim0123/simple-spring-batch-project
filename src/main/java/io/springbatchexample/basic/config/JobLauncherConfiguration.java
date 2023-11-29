@@ -1,4 +1,4 @@
-package io.springbatchexample.config.basic.config;
+package io.springbatchexample.basic.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -9,9 +9,10 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @RequiredArgsConstructor
 //@Configuration
-public class JobExecutionConfiguration {
+public class JobLauncherConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -27,19 +28,17 @@ public class JobExecutionConfiguration {
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet((contribution, chunkContext) -> {
-                    System.out.println("step 1");
+                    Thread.sleep(1000 * 3);
                     return RepeatStatus.FINISHED;
-                }).build();
+                })
+                .build();
     }
 
     @Bean
     public Step step2() {
         return stepBuilderFactory.get("step2")
-                .tasklet((contribution, chunkContext) -> {
-                    System.out.println("step 2");
-                    
-                    throw new RuntimeException("step2에서 에러");
-                    // return RepeatStatus.FINISHED;
-                }).build();
+                .tasklet((contribution, chunkContext) -> null)
+                .build();
     }
 }
+

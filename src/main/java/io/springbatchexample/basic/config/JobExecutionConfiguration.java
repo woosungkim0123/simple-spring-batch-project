@@ -1,4 +1,4 @@
-package io.springbatchexample.config.basic.config;
+package io.springbatchexample.basic.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -9,14 +9,9 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
-/**
- * TaskletStep 수행 도중 -> StepExecution에서 StepContribution을 생성
- * StepExecution은 apply를 통해 StepContribution의 내용을 업데이트함.
- */
 @RequiredArgsConstructor
 //@Configuration
-public class StepContributionConfiguration {
+public class JobExecutionConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -42,8 +37,9 @@ public class StepContributionConfiguration {
         return stepBuilderFactory.get("step2")
                 .tasklet((contribution, chunkContext) -> {
                     System.out.println("step 2");
-                    return RepeatStatus.FINISHED;
+                    
+                    throw new RuntimeException("step2에서 에러");
+                    // return RepeatStatus.FINISHED;
                 }).build();
     }
-
 }

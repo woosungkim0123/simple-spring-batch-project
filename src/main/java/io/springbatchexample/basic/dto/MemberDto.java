@@ -1,4 +1,4 @@
-package io.springbatchexample.dto;
+package io.springbatchexample.basic.dto;
 
 import lombok.Getter;
 

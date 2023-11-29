@@ -1,16 +1,15 @@
-package io.springbatchexample.config.basic.config;
+package io.springbatchexample.basic.config;
 
-import io.springbatchexample.config.basic.config.tasklet.ExecutionContextTasklet1;
-import io.springbatchexample.config.basic.config.tasklet.ExecutionContextTasklet2;
-import io.springbatchexample.config.basic.config.tasklet.ExecutionContextTasklet3;
-import io.springbatchexample.config.basic.config.tasklet.ExecutionContextTasklet4;
+import io.springbatchexample.basic.config.tasklet.ExecutionContextTasklet2;
+import io.springbatchexample.basic.config.tasklet.ExecutionContextTasklet3;
+import io.springbatchexample.basic.config.tasklet.ExecutionContextTasklet4;
+import io.springbatchexample.basic.config.tasklet.ExecutionContextTasklet1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
 @RequiredArgsConstructor

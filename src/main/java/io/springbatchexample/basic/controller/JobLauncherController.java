@@ -1,7 +1,7 @@
-package io.springbatchexample.controller;
+package io.springbatchexample.basic.controller;
 
 
-import io.springbatchexample.dto.MemberDto;
+import io.springbatchexample.basic.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;

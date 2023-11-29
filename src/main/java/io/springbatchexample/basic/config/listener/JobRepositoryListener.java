@@ -1,4 +1,4 @@
-package io.springbatchexample.config.basic.config.listener;
+package io.springbatchexample.basic.config.listener;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
