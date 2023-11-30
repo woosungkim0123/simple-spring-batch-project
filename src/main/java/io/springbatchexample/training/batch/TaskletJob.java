@@ -1,4 +1,4 @@
-package io.springbatchexample.training;
+package io.springbatchexample.training.batch;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
