@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 @RequiredArgsConstructor
-@RestController
+//@RestController
 public class JobLauncherController {
 
     private final JobLauncher jobLauncher;

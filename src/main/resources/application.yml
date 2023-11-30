@@ -39,3 +39,21 @@ spring:
       isolation-level-for-create: default
     job:
       names: ${job.name:NONE}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: training
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '0000'
+
+  batch:
+    jdbc:
+      initialize-schema: embedded
+      isolation-level-for-create: default
+    job:
+      names: ${job.name:NONE}
