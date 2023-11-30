@@ -17,6 +17,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 
+/**
+ * dept1 데이터를 읽어서 가공후(process) dept2에 저장하는 배치
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
