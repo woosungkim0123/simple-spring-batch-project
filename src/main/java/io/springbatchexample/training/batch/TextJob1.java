@@ -23,7 +23,7 @@ public class TextJob1 {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    private int chunkSize = 5;
+    private static final int chunkSize = 5;
 
     @Bean
     public Job textJob1_batchBuild() {

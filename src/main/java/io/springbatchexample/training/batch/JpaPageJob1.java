@@ -24,7 +24,7 @@ public class JpaPageJob1 {
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
 
-    private int chunkSize = 10; // chunk :단위, 덩어리
+    private static final int chunkSize = 10; // chunk :단위, 덩어리
     // 한꺼번에 batch를 많이 하게되면 메모리를 모두 사용할 수 있으니 잘라서 순차적으로 배치를 돌림.
     // 반드시 맞는건 아니고 배치 특성에 따라 한번에 메모리에 가져와야하는 경우도 있음. (잘라서 가져오면 가지고 오는 동안 배치 내용이 달라질 수 있음)
 

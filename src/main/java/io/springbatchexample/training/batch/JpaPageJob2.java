@@ -29,7 +29,7 @@ public class JpaPageJob2 {
     private final StepBuilderFactory stepBuilderFactory;
     private final EntityManagerFactory entityManagerFactory;
 
-    private int chunkSize = 10;
+    private static final int chunkSize = 10;
 
     @Bean
     public Job jpaPageJob2_batchBuild() {
