@@ -11,6 +11,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,6 +54,10 @@ public class CsvToJpaJob2 {
                 .reader(csvToJpaJob2_FileReader())
                 .processor(csvToJpaJob2_Processor())
                 .writer(csvToJpaJob2_FileWriter())
+                // 에러가 난 것도 무시하고 넘어가고 싶을 때
+                .faultTolerant()
+                .skip(FlatFileParseException.class)
+                .skipLimit(2)
                 .build();
     }
 
