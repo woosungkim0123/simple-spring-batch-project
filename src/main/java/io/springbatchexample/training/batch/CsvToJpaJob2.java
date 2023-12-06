@@ -15,16 +15,13 @@ import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.IOException;
 
 
-// 14분 03초
 /**
  * 멀티 csv 파일 내용을 db로 옮기는 배치
  */
