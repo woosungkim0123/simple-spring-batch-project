@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @ToString
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@Table(name = "dept1_db1")
+@Table(name = "dept3")
 @Entity
 public class Dept3 {
 
