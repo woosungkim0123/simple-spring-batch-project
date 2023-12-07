@@ -50,7 +50,7 @@ public class JpaPageJob1 {
                 .name("jpaPageJob1_dbItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(chunkSize)
-                .queryString("SELECT d FROM Dept1 d ORDER BY d.id asc")
+                .queryString("SELECT d FROM Dept3 d ORDER BY d.id asc")
                 .build();
     }
 
@@ -58,7 +58,7 @@ public class JpaPageJob1 {
     public ItemWriter<Dept1> jpaPageJob1_printItemWriter() {
         return list -> {
             for (Dept1 dept1 : list) {
-                log.info("Dept1 : {}", dept1.toString());
+                log.info("Dept3 : {}", dept1.toString());
             }
         };
     }

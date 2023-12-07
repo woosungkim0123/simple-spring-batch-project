@@ -68,6 +68,42 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: '0000'
+  batch:
+    jdbc:
+      initialize-schema: embedded
+      isolation-level-for-create: default
+    job:
+      names: ${job.name:NONE}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: double
+  db1:
+    datasource:
+      url: jdbc:mysql://localhost:3306/test
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: '0000'
+    jpa:
+      show-sql: true
+    hibernate:
+      ddl-auto: update
+  db2:
+    datasource:
+      url: jdbc:mysql://localhost:3307/test2
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: '000'
+    jpa:
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+    hibernate:
+      ddl-auto: create
+
 
   batch:
     jdbc:

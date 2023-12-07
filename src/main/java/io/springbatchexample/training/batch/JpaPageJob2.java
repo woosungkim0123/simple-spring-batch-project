@@ -54,7 +54,7 @@ public class JpaPageJob2 {
                 .name("jpaPageJob2_dbItemReader")
                 .entityManagerFactory(entityManagerFactory)
                 .pageSize(chunkSize)
-                .queryString("SELECT d FROM Dept1 d ORDER BY d.id asc")
+                .queryString("SELECT d FROM Dept3 d ORDER BY d.id asc")
                 .build();
     }
 
