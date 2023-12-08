@@ -18,7 +18,7 @@ public class TestDeptRepository {
     @DisplayName("training을 위한 테스트 데이터를 만든다.")
     @Test
     void depth01() {
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 10000; i++) {
             dept1Repository.save(new Dept1((long) i, "name_" + i, "location_" + i));
         }
     }

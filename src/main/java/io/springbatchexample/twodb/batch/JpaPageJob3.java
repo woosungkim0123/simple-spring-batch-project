@@ -29,7 +29,7 @@ import javax.sql.DataSource;
  * db1 -> db2 저장하기
  */
 @Slf4j
-@Configuration
+//@Configuration
 public class JpaPageJob3 {
 
     private final JobBuilderFactory jobBuilderFactory;
