@@ -10,6 +10,6 @@ Spring Batch provides robust and scalable solutions for complex batch jobs, maki
 
 - Understanding the Batch Domain
 - Basic Operation of Batch
-- Communication Across Multiple Databases in BATCH
+- Communication Across Multiple Databases in Batch
 - Batch parallel processing
   
