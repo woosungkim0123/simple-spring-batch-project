@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: training
+    active: mysql
 logging:
   level:
     root: info
@@ -38,7 +38,7 @@ spring:
       initialize-schema: embedded
       isolation-level-for-create: default
     job:
-      names: ${job.name:NONE}
+      enabled: false
 
 ---
 spring:
