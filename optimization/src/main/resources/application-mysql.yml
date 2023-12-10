@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:abc
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  batch:
+    jdbc:
+      initialize-schema: always
+      isolation-level-for-create: default
+    job:
+      names: ${job.name:NONE}
