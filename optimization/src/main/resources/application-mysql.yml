@@ -1,12 +1,16 @@
 spring:
+  config:
+    activate:
+      on-profile: mysql
   datasource:
-    url: jdbc:h2:mem:abc
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  batch:
-    jdbc:
-      initialize-schema: always
-      isolation-level-for-create: default
-    job:
-      names: ${job.name:NONE}
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '0000'
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
