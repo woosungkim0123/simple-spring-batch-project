@@ -14,3 +14,7 @@ spring:
     properties:
       hibernate:
         default_batch_fetch_size: 1000
+  batch:
+    job:
+      names: ${job.name:NONE}
+      enabled: false
