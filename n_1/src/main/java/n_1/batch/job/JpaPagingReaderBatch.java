@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 
 import static n_1.batch.job.JpaPagingReaderBatch.JOB_NAME;
 
+
 /**
  * N+1 문제 발생 예시를 보여주는 배치
  * 1. join fetch를 사용해 하위 엔티티 2개를 같이 조회 -> MultipleBagFetchException -> join fetch는 하나의 자식에게만 가능 <해결 x>
@@ -34,7 +35,7 @@ public class JpaPagingReaderBatch {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    private final StoreJpaPagingReaderConfig storeJpaPagingReaderConfig;
+    private final StoreJpaPagingReaderConfig reader;
     private final ItemProcessor<Store, StoreHistory> processor;
     private final JpaItemWriter<StoreHistory> writer;
 
@@ -53,7 +54,7 @@ public class JpaPagingReaderBatch {
     public Step step() {
         return stepBuilderFactory.get(STEP_NAME)
                 .<Store, StoreHistory>chunk(chunkSize)
-                .reader(storeJpaPagingReaderConfig.reader(ADDRESS_PARAM, chunkSize))
+                .reader(reader.reader(ADDRESS_PARAM, chunkSize))
                 .processor(processor)
                 .writer(writer)
                 .build();

@@ -13,7 +13,9 @@ import javax.persistence.EntityManagerFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
+/**
+ * JpaPagingItemReader 사용 - 내부 트랜잭션으로 인해 batch size가 적용되지 않음
+ */
 @RequiredArgsConstructor
 @Configuration
 public class StoreJpaPagingReaderConfig {

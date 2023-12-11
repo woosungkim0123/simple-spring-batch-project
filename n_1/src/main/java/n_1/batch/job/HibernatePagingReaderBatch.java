@@ -32,7 +32,7 @@ public class HibernatePagingReaderBatch {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    private final StoreHibernatePagingReaderConfig storeHibernatePagingReaderConfig;
+    private final StoreHibernatePagingReaderConfig reader;
     private final ItemProcessor<Store, StoreHistory> processor;
     private final JpaItemWriter<StoreHistory> writer;
 
@@ -51,7 +51,7 @@ public class HibernatePagingReaderBatch {
     public Step step() {
         return stepBuilderFactory.get(STEP_NAME)
                 .<Store, StoreHistory>chunk(chunkSize)
-                .reader(storeHibernatePagingReaderConfig.reader(ADDRESS_PARAM, chunkSize))
+                .reader(reader.reader(ADDRESS_PARAM, chunkSize))
                 .processor(processor)
                 .writer(writer)
                 .build();

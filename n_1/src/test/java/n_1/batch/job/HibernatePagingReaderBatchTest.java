@@ -36,7 +36,7 @@ class HibernatePagingReaderBatchTest {
 
     @DisplayName("HibernatePagingItemReader는 batch size가 적용되어 N+1 문제가 발생하지 않는다.")
     @Test
-    public void hibernatePagingItemReader_used_in_query() throws Exception {
+    public void batch_size_is_applied_to_HibernatePagingItemReader() throws Exception {
         // given
         mockStoreData.saveStores();
 

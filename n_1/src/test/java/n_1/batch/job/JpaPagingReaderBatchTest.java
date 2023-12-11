@@ -40,7 +40,7 @@ class JpaPagingReaderBatchTest {
 
     @DisplayName("JpaPagingItemReader는 batch size가 적용되지 않아 N+1 문제가 해결되지 않는다")
     @Test
-    public void JpaPagingItemReader_make_problem() throws Exception {
+    public void batch_size_does_not_apply_to_JpaPagingItemReader() throws Exception {
         // given
         mockStoreData.saveStores();
 

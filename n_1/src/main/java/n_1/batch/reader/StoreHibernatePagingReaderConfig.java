@@ -13,7 +13,9 @@ import javax.persistence.EntityManagerFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
+/**
+ * HibernatePagingItemReader 사용 - batch size가 적용됨
+ */
 @RequiredArgsConstructor
 @Configuration
 public class StoreHibernatePagingReaderConfig {
