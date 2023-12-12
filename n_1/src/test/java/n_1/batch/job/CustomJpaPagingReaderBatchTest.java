@@ -17,20 +17,16 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * JpaPagingItemReader는 batch size가 적용되지 않아 N+1 문제가 해결되지 않는 것을 보여주는 테스트
+ * CustomJpaPagingItemReader는 batch size가 적용되어 in query 사용으로 N+1 문제가 해결된 것을 보여주는 테스트
  *
  * 로그 결과
- * Hibernate: select store0_.id as id1_3_, ... from store store0_ where store0_.address like ? limit ?
- * Hibernate: select products0_.store_id as store_id4_2_1_, ... from product products0_ where products0_.store_id=?
- * Hibernate: select employees0_.store_id as store_id4_0_1_, ... from employee employees0_ where employees0_.store_id=?
- * Hibernate: select products0_.store_id as store_id4_2_1_, ...  from product products0_ where products0_.store_id=?
- * Hibernate: select employees0_.store_id as store_id4_0_1_, ... from employee employees0_ where employees0_.store_id=?
- * Hibernate: select products0_.store_id as store_id4_2_1_, ...  from product products0_ where products0_.store_id=?
- * Hibernate: select employees0_.store_id as store_id4_0_1_, ... from employee employees0_ where employees0_.store_id=?
+ * Hibernate: select store0_.id as id1_2_, ... from store store0_ where store0_.address like ? limit ?
+ * Hibernate: select products0_.store_id as store_id4_1_1_, ... from product products0_ where products0_.store_id in (?, ?, ?)
+ * Hibernate: select employees0_.store_id as store_id4_0_1_, ... from employee employees0_ where employees0_.store_id in (?, ?, ?)
  */
-@TestPropertySource(properties = "job.name=jpaPagingReaderBatchJob")
+@TestPropertySource(properties = "job.name=customJpaPagingReaderBatchJob")
 @SpringBootTest
-class JpaPagingReaderBatchTest {
+class CustomJpaPagingReaderBatchTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
@@ -38,9 +34,9 @@ class JpaPagingReaderBatchTest {
     @Autowired
     private MockStoreData mockStoreData;
 
-    @DisplayName("JpaPagingItemReader는 batch size가 적용되지 않아 N+1 문제가 해결되지 않는다.")
+    @DisplayName("CustomJpaPagingItemReader는 batch size가 적용되어 N+1 문제가 발생하지 않는다.")
     @Test
-    public void batch_size_does_not_apply_to_JpaPagingItemReader() throws Exception {
+    public void batch_size_is_applied_to_CustomJpaPagingItemReader() throws Exception {
         // given
         mockStoreData.saveStores();
 
