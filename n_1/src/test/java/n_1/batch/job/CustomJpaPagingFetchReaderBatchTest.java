@@ -38,9 +38,9 @@ class CustomJpaPagingFetchReaderBatchTest {
     @Autowired
     private MockStoreData mockStoreData;
 
-    @DisplayName("")
+    @DisplayName("Set을 사용하여 fetch join을 사용할 수 있지만 메모리 관련 warning이 발생한다.")
     @Test
-    public void batch_size_is_applied_to_CustomJpaPagingItemReader() throws Exception {
+    public void batch_with_fetch_join_enabled_using_set() throws Exception {
         // given
         mockStoreData.saveStoresSet();
 
