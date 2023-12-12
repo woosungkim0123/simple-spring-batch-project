@@ -27,10 +27,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @TestPropertySource(properties = {
         "spring.jpa.properties.hibernate.default_batch_fetch_size=0",
-        "job.name=customJpaPagingFetchReaderBatchJob"
+        "job.name=jpaPagingFetchReaderBatchJob"
 })
 @SpringBootTest
-class CustomJpaPagingFetchReaderBatchTest {
+class JpaPagingFetchReaderBatchTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;

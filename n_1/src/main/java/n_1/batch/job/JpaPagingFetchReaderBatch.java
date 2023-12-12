@@ -1,7 +1,7 @@
 package n_1.batch.job;
 
 import lombok.RequiredArgsConstructor;
-import n_1.batch.reader.StoreCustomJpaPagingFetchReaderConfig;
+import n_1.batch.reader.StoreJpaPagingFetchReaderConfig;
 import n_1.domain.StoreHistory;
 import n_1.domain.list_change_set_domain.StoreSet;
 import org.springframework.batch.core.Job;
@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static n_1.batch.job.CustomJpaPagingFetchReaderBatch.JOB_NAME;
+import static n_1.batch.job.JpaPagingFetchReaderBatch.JOB_NAME;
 
 
 /**
@@ -27,15 +27,15 @@ import static n_1.batch.job.CustomJpaPagingFetchReaderBatch.JOB_NAME;
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "job.name", havingValue = JOB_NAME)
 @Configuration
-public class CustomJpaPagingFetchReaderBatch {
+public class JpaPagingFetchReaderBatch {
 
-    public static final String JOB_NAME = "customJpaPagingFetchReaderBatchJob";
+    public static final String JOB_NAME = "jpaPagingFetchReaderBatchJob";
     private static final String STEP_NAME = JOB_NAME + "Step";
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    private final StoreCustomJpaPagingFetchReaderConfig reader;
+    private final StoreJpaPagingFetchReaderConfig reader;
     private final ItemProcessor<StoreSet, StoreHistory> processor;
     private final JpaItemWriter<StoreHistory> writer;
 
