@@ -2,12 +2,16 @@ package n_1.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import n_1.domain.list_change_set_domain.EmployeeSet;
+import n_1.domain.list_change_set_domain.ProductSet;
+import n_1.domain.list_change_set_domain.StoreSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -30,6 +34,16 @@ public class StoreHistory {
 
         this.employeeNames = employees.stream()
                 .map(Employee::getName)
+                .collect(Collectors.joining( "," ));
+    }
+
+    public StoreHistory(StoreSet store, Set<ProductSet> products, Set<EmployeeSet> employees) {
+        this.storeName = store.getName();
+        this.productNames = products.stream()
+                .map(ProductSet::getName)
+                .collect(Collectors.joining( "," ));
+        this.employeeNames = employees.stream()
+                .map(EmployeeSet::getName)
                 .collect(Collectors.joining( "," ));
     }
 }
