@@ -3,6 +3,8 @@
 
 Spring Batch를 사용하면서 JPA를 통해 데이터를 처리할 때, 만날 수 있는 N+1 쿼리 문제에 대해서 해결을 위한 다양한 시도를 공유하고자 합니다.
 
+<a href="https://woosungkim0123.github.io/posts/batch_n_1/" target="_blank"><strong>블로그 글 보러가기</strong></a>
+
 ## 문제 상황
 
 조건에 맞는 Store를 StoreHistory로 백업하는 배치 작업에서, Store와 연관된 하위 도메인 두 개를 가져와서 배치 프로세서에서 처리하는 과정에서 N+1 쿼리가 발생하였습니다.
