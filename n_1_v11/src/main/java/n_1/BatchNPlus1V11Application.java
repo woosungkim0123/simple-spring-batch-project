@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableBatchProcessing
 @SpringBootApplication
-public class Batch_n_1Application {
+public class BatchNPlus1V11Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Batch_n_1Application.class, args);
+		SpringApplication.run(BatchNPlus1V11Application.class, args);
 	}
 }
