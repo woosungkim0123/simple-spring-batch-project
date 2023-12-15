@@ -111,7 +111,7 @@ Batch Fetch Size는 연관된 엔티티나 컬렉션을 로드할 때 일정 수
 이 문제를 해결하기 위해 JpaPagingItemReader 내부의 트랜잭션을 제거하여 Chunk에게 트랜잭션을 맡기는 방식이 있습니다.
 
 > 내부에 트랜잭션을 제거하여 문제를 해결한 포스트   
-> 링크: <a href="https://jojoldu.tistory.com/414" target="_blank"><strong>https://jojoldu.tistory.com/414</strong></a>
+> 링크: <a href="https://jojoldu.tistory.com/414" target="_blank"><strong>https://jojoldu.tistory.com/414 </strong></a>
 
 ![IN 쿼리 적용](image/n_5.png)
 
