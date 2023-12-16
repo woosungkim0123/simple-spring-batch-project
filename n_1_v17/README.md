@@ -78,8 +78,6 @@ JobBuilderFactory, StepBuilderFactory가 deprecated 되고 JobBuilder, StepBuild
 
 #### JobBuilderFactory, StepBuilderFactory를 deprecated 시킨 이유
 
-<a href="https://github.com/spring-projects/spring-batch/issues/4188" target="_blank"><strong> Issue #4188 </strong></a>
-
 1. JobBuilderFactory는 내부적으로 JobRepository를 생성하고 설정하는데, 이 과정이 암시적으로 이루어지다보니 많은 사용자들, 특히 새로운 사용자들에게 혼란을 줄 수 있다고 했습니다.
 
 2. 하나의 애플리케이션 내에서 여러 개의 JobRepository를 사용하는 경우들이 많은데 이를 변경하려면 BatchConfigurer라는 커스텀 클래스를 만들어서 JobBuilderFactory에 다른 JobRepository를 설정해야 하다보니 간편함과는 거리가 멀다고 했습니다.
