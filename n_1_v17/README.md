@@ -82,11 +82,9 @@ JobBuilderFactory, StepBuilderFactory가 deprecated 되고 JobBuilder, StepBuild
 
 1. JobBuilderFactory는 내부적으로 JobRepository를 생성하고 설정하는데, 이 과정이 암시적으로 이루어지다보니 많은 사용자들, 특히 새로운 사용자들에게 혼란을 줄 수 있다고 했습니다.
 
-2. 하나의 애플리케이션 내에서 여러 개의 JobRepository를 사용하는 경우들이 많은데 JobBuilderFactory가 사용하는 JobRepository를 변경하려면 BatchConfigurer라는 커스텀 클래스를 만들어서 JobBuilderFactory에 다른 JobRepository를 설정해야 하다보니 간편함과는 거리가 멀다고 했습니다.
+2. 하나의 애플리케이션 내에서 여러 개의 JobRepository를 사용하는 경우들이 많은데 이를 변경하려면 BatchConfigurer라는 커스텀 클래스를 만들어서 JobBuilderFactory에 다른 JobRepository를 설정해야 하다보니 간편함과는 거리가 멀다고 했습니다.
 
 위와 같은 이유 때문에 Spring Batch에서는 JobBuilderFactory의 사용을 권장하지 않고, 대신 더 명시적인 JobBuilder의 사용을 선호하게 되었다고 합니다.
-
-이러한 개선은 개발자에게 더 많은 통제력을 주고, 코드의 명확성과 유지보수성을 향상시킨다고 이야기했습니다.
 
 #### JobRepository와 TransactionManager의 사용 방식이 명시적으로 변경
 
@@ -100,11 +98,15 @@ chunk 설정을 함에 있어 size 뿐만 아니라 transactionManager도 함께
 
 ![chunk](image/chunk.png)
 
-거기다 batch 5.1 버전에서는 변경도 deprecated 시킴으로써 생성자를 통해 주입 받으면 이후 변경할 수 없게 되었습니다.
+Batch 5.1 버전에서는 변경도 deprecated 시킴으로써 생성자를 통해 주입 받으면 이후 변경할 수 없게 되었습니다.
 
 더 명시적이고, 안정적인 방식으로 JobRepository와 TransactionManager를 관리하도록 한 것으로 보입니다.
 
 ![repository 변경 메서드 depreacted](image/deprecated3.png)
+
+## Batch 코드 비교
+
+Reader, Processor, Writer는 변경사항이 없어 생략했습니다.
 
 ```java
 // v4
