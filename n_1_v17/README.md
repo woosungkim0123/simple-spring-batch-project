@@ -3,9 +3,9 @@
 
 기존 Spring Batch에서 JPA 사용시 발생하는 N+1 문제에 대해서 JDK 17, Spring Batch 5.0 이상 버전에서 발생하는 변경점을 확인하고자 합니다.
 
-<a href="https://woosungkim0123.github.io/posts/batch_n_1/" target="_blank"><strong>Spring Batch에서 JPA 사용시 발생하는 N+1 문제 블로그 글 </strong></a>  
+<a href="https://woosungkim0123.github.io/posts/batch_n_1/" target="_blank"><strong>이전 Spring Batch에서 JPA 사용시 발생하는 N+1 문제 블로그 글 </strong></a>  
 
-<a href="https://github.com/woosungkim0123/spring-batch-deep-dive/tree/main/n_1_v11" target="_blank"><strong>Spring Batch에서 JPA 사용시 발생하는 N+1 문제 코드</strong></a>
+<a href="https://github.com/woosungkim0123/spring-batch-deep-dive/tree/main/n_1_v11" target="_blank"><strong>이전 Spring Batch에서 JPA 사용시 발생하는 N+1 문제 코드</strong></a>
 
 <a href="https://woosungkim0123.github.io/posts/batch_n_1_v17/" target="_blank"><strong>Spring Batch에서 JPA 사용시 발생하는 N+1 문제 - JDK 17, Batch 5.0 이상 변경점 블로그 글 </strong></a>
 
