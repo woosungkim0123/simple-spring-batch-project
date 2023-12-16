@@ -3,15 +3,15 @@
 
 기존 Spring Batch에서 JPA 사용시 발생하는 N+1 문제에 대해서 JDK 17, Spring Batch 5.0 이상 버전에서 발생하는 변경점을 확인하고자 합니다.
 
-<a href="https://woosungkim0123.github.io/posts/batch_n_1/" target="_blank"><strong>이전 Spring Batch에서 JPA 사용시 발생하는 N+1 문제 블로그 글 </strong></a>  
-
-<a href="https://github.com/woosungkim0123/spring-batch-deep-dive/tree/main/n_1_v11" target="_blank"><strong>이전 Spring Batch에서 JPA 사용시 발생하는 N+1 문제 코드</strong></a>
+Spring Batch에서 JPA 사용시 발생하는 N+1 문제 (JDK 11, Batch 4.2)  <a href="https://woosungkim0123.github.io/posts/batch_n_1/" target="_blank"><strong>블로그 글 </strong></a>, <a href="https://github.com/woosungkim0123/spring-batch-deep-dive/tree/main/n_1_v11" target="_blank"><strong>코드</strong></a>
 
 <a href="https://woosungkim0123.github.io/posts/batch_n_1_v17/" target="_blank"><strong>Spring Batch에서 JPA 사용시 발생하는 N+1 문제 - JDK 17, Batch 5.0 이상 변경점 블로그 글 </strong></a>
 
 ## Batch 5.0 이상 변경점
 
-기존 코드에서 필요하다고 생각되는 부분만 다루었습니다. 자세한 정보를 보시려면 <a href="https://github.com/spring-projects/spring-batch/wiki/Spring-Batch-5.0-Migration-Guide" target="_blank"><strong>링크</strong></a>를   참조해주세요.
+기존 코드에서 필요하다고 생각되는 부분만 다루었습니다. 
+
+자세한 정보를 보시려면 <a href="https://github.com/spring-projects/spring-batch/wiki/Spring-Batch-5.0-Migration-Guide" target="_blank"><strong>링크</strong></a>를 참조해주세요.
 
 ### Database 스키마 수정
 
@@ -31,7 +31,7 @@ BATCH_JOB_EXECUTION 테이블 JOB_CONFIGURATION_LOCATION 열이 더이상 사용
 
 <a href="https://github.com/spring-projects/spring-batch/issues/3960" target="_blank"><strong> Issue #3960 </strong></a> 에서 Spring Boot 사용자에게 친숙한 Parameter 변경 제안이 있었는데 이를 반영한 것으로 보입니다.
 
-```SQL
+```sql
 CREATE TABLE BATCH_JOB_EXECUTION_PARAMS  (
     JOB_EXECUTION_ID BIGINT NOT NULL ,
     --	TYPE_CD VARCHAR(6) NOT NULL , -- 제거
@@ -74,7 +74,7 @@ ps. n_1_v17 프로젝트에서 HibernatePagingItemReader를 사용하는 예시 
 
 JobBuilderFactory, StepBuilderFactory가 deprecated 되고 JobBuilder, StepBuilder 사용을 권장하고 있습니다.
 
-![img_3.png](image/factory_depreacted.png)
+![Factory deprecated](image/factory_depreacted.png)
 
 #### JobBuilderFactory, StepBuilderFactory를 deprecated 시킨 이유
 
@@ -85,6 +85,8 @@ JobBuilderFactory, StepBuilderFactory가 deprecated 되고 JobBuilder, StepBuild
 2. 하나의 애플리케이션 내에서 여러 개의 JobRepository를 사용하는 경우들이 많은데 이를 변경하려면 BatchConfigurer라는 커스텀 클래스를 만들어서 JobBuilderFactory에 다른 JobRepository를 설정해야 하다보니 간편함과는 거리가 멀다고 했습니다.
 
 위와 같은 이유 때문에 Spring Batch에서는 JobBuilderFactory의 사용을 권장하지 않고, 대신 더 명시적인 JobBuilder의 사용을 선호하게 되었다고 합니다.
+
+참고: <a href="https://github.com/spring-projects/spring-batch/issues/4188" target="_blank"><strong> Issue #4188 </strong></a>
 
 #### JobRepository와 TransactionManager의 사용 방식이 명시적으로 변경
 
