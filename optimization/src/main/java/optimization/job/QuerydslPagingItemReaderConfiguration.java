@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import optimization.domain.Product;
 import optimization.domain.ProductBackup;
+import optimization.job.parameter.QuerydslPagingItemReaderJobParameter;
 import optimization.reader.QuerydslPagingItemReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

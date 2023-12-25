@@ -1,4 +1,4 @@
-package optimization.job;
+package optimization.job.parameter;
 
 
 import lombok.Getter;
