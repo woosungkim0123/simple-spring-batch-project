@@ -19,8 +19,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import java.time.LocalDate;
-
 import static optimization.domain.QProduct.product;
 
 @RequiredArgsConstructor
@@ -48,7 +46,6 @@ public class QuerydslPagingItemReaderConfiguration {
         return new QuerydslPagingItemReaderJobParameter();
     }
 
-
     @Bean
     public Job job() {
         return new JobBuilder(JOB_NAME, jobRepository)
@@ -67,11 +64,10 @@ public class QuerydslPagingItemReaderConfiguration {
     }
 
     @Bean
-    @JobScope
     public QuerydslPagingItemReader<Product> reader() {
         return new QuerydslPagingItemReader<>(entityManagerFactory, chunkSize, queryFactory -> queryFactory
                 .selectFrom(product)
-                .where(product.createDate.eq(LocalDate.of(2023, 12, 23)))
+                .where(product.createDate.eq(jobParameter.getDate()))
         );
     }
 

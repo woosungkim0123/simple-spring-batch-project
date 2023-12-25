@@ -19,15 +19,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * querydsl reader를 사용하여 배치를 실행하는 테스트
  */
 @TestPropertySource(properties = "job.name=querydslPagingItemReaderBatchJob")
-@SpringBatchTest
 @SpringBootTest
+@SpringBatchTest
 class QuerydslPagingItemReaderConfigurationTest {
+
+    public static final DateTimeFormatter FORMATTER = ofPattern("yyyy-MM-dd");
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
@@ -49,8 +52,8 @@ class QuerydslPagingItemReaderConfigurationTest {
         productRepository.save(Product.builder().name("product2").amount(2000).createDate(anotherDate).build());
         productRepository.save(Product.builder().name("product3").amount(3000).createDate(date).build());
 
-        JobParameters jobParameters = new JobParametersBuilder()
-                .addString("date", date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+        JobParameters jobParameters = new JobParametersBuilder(jobLauncherTestUtils.getUniqueJobParameters())
+                .addString("date", date.format(FORMATTER))
                 .toJobParameters();
 
         // when

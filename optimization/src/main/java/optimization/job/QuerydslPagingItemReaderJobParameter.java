@@ -15,7 +15,10 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 public class QuerydslPagingItemReaderJobParameter {
     private LocalDate date;
 
-    @Value("#{jobParameters[date]}")
+    /**
+     * 기본값을 정하지 않으면 테스트 시 NullPointerException이 발생한다.
+     */
+    @Value("#{jobParameters['date'] ?: T(java.time.LocalDate).now().toString()}")
     public void setDate(String date) {
         this.date = parse(date, ofPattern("yyyy-MM-dd"));
     }
