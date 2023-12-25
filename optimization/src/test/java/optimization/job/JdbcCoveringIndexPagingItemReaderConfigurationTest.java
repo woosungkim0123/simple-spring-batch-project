@@ -23,6 +23,10 @@ import java.util.List;
 import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * 해당 테스트를 위해서 application-mysql.yml에 mysql 설정을 추가해야합니다.
+ * h2로 하지 않은 이유는 mysql의 커버링 인덱스 쿼리를 테스트하기 위함입니다.
+ */
 @ActiveProfiles("mysql")
 @TestPropertySource(properties = "job.name=jdbcCoveringIndexPagingItemReaderBatchJob")
 @SpringBootTest
@@ -48,7 +52,7 @@ class JdbcCoveringIndexPagingItemReaderConfigurationTest {
 
     @DisplayName("부분적으로 적용되는 커버링 인덱스 쿼리를 사용하기위해 JDBC Reader를 사용하여 배치가 정상적으로 실행된다.")
     @Test
-    void batch_success_using_querydsl_reader() throws Exception {
+    void batch_success_using_jdbc_reader_and_covering_index() throws Exception {
         // given
         saveMockProductData();
 
