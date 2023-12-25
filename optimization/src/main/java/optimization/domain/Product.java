@@ -1,8 +1,6 @@
 package optimization.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +11,9 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Getter
 @NoArgsConstructor(access = PROTECTED)
+@Table(name = "product", indexes = {
+        @Index(name = "idx_product_create_date", columnList = "createDate")
+})
 @Entity
 public class Product {
 
