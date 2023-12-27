@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import optimization.domain.Product;
 import optimization.domain.ProductBackup;
 import optimization.job.parameter.QuerydslPagingItemReaderJobParameter;
-import optimization.job.parameter.QuerydslZeroPagingItemReaderJobParameter;
 import optimization.reader.QuerydslPagingItemReader;
+import optimization.reader.QuerydslZeroPagingItemReader;
+import optimization.reader.expression.Expression;
+import optimization.reader.options.QuerydslNoOffsetNumberOptions;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
@@ -24,12 +26,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import static optimization.domain.QProduct.product;
 
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "job.name", havingValue = QuerydslPagingItemReaderConfiguration.JOB_NAME)
+@ConditionalOnProperty(name = "job.name", havingValue = QuerydslZeroPagingItemReaderConfiguration.JOB_NAME)
 @Configuration
-public class QuerydslPagingItemReaderConfiguration {
+public class QuerydslZeroPagingItemReaderConfiguration {
 
-    public static final String JOB_NAME = "querydslPagingItemReaderBatchJob";
-    public static final String STEP_NAME = "querydslPagingItemReaderBatchStep";
+    public static final String JOB_NAME = "querydslZeroPagingItemReaderBatchJob";
+    public static final String STEP_NAME = "querydslZeroPagingItemReaderBatchStep";
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
     private final PlatformTransactionManager transactionManager;
@@ -37,15 +39,15 @@ public class QuerydslPagingItemReaderConfiguration {
 
     private int chunkSize;
 
-    @Value("${chunkSize:1000}")
+    @Value("${chunkSize:100}")
     public void setChunkSize(int chunkSize) {
         this.chunkSize = chunkSize;
     }
 
     @Bean
     @JobScope
-    public QuerydslZeroPagingItemReaderJobParameter jobParameter() {
-        return new QuerydslZeroPagingItemReaderJobParameter();
+    public QuerydslPagingItemReaderJobParameter jobParameter() {
+        return new QuerydslPagingItemReaderJobParameter();
     }
 
     @Bean
@@ -66,8 +68,11 @@ public class QuerydslPagingItemReaderConfiguration {
     }
 
     @Bean
-    public QuerydslPagingItemReader<Product> reader() {
-        return new QuerydslPagingItemReader<>(entityManagerFactory, chunkSize, queryFactory -> queryFactory
+    public QuerydslZeroPagingItemReader<Product> reader() {
+        QuerydslNoOffsetNumberOptions<Product, Long> options =
+                new QuerydslNoOffsetNumberOptions<>(product.id, Expression.ASC);
+
+        return new QuerydslZeroPagingItemReader<>(entityManagerFactory, chunkSize, options, queryFactory -> queryFactory
                 .selectFrom(product)
                 .where(product.createDate.eq(jobParameter.getDate()))
         );
