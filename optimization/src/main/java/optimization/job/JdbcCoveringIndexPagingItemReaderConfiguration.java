@@ -42,7 +42,7 @@ public class JdbcCoveringIndexPagingItemReaderConfiguration {
 
     private int chunkSize;
 
-    @Value("${chunkSize:2}")
+    @Value("${chunkSize:1000}")
     public void setChunkSize(int chunkSize) {
         this.chunkSize = chunkSize;
     }
@@ -73,15 +73,14 @@ public class JdbcCoveringIndexPagingItemReaderConfiguration {
     @JobScope
     @Bean
     public CustomJdbcPagingItemReader<Product> reader() {
-        String query = "SELECT p.id, p.name, p.amount, p.create_date FROM product p JOIN (SELECT id FROM product WHERE create_date = :date ORDER BY id ASC LIMIT :page, :pageSize) as temp on temp.id = p.id";
+        String query = "SELECT p.* FROM product p JOIN (SELECT id FROM product ORDER BY id ASC LIMIT :page, :pageSize) as temp on temp.id = p.id";
         CustomJdbcPagingItemReader<Product> reader = new CustomJdbcPagingItemReader<>(dataSource, query, new ProductRowMapper(), chunkSize);
-        reader.setDate(jobParameter.getDate());
+        //reader.setDate(jobParameter.getDate());
 
         return reader;
     }
 
     private ItemProcessor<Product, ProductBackup> processor() {
-        System.out.println("processor");
         return product -> ProductBackup.builder()
                 .name(product.getName() + "_backup")
                 .amount(product.getAmount())

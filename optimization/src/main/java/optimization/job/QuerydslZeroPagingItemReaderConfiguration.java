@@ -4,8 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import lombok.RequiredArgsConstructor;
 import optimization.domain.Product;
 import optimization.domain.ProductBackup;
-import optimization.job.parameter.QuerydslPagingItemReaderJobParameter;
-import optimization.reader.QuerydslPagingItemReader;
+import optimization.job.parameter.QuerydslZeroPagingItemReaderJobParameter;
 import optimization.reader.QuerydslZeroPagingItemReader;
 import optimization.reader.expression.Expression;
 import optimization.reader.options.QuerydslNoOffsetNumberOptions;
@@ -35,19 +34,19 @@ public class QuerydslZeroPagingItemReaderConfiguration {
     private final JobRepository jobRepository;
     private final EntityManagerFactory entityManagerFactory;
     private final PlatformTransactionManager transactionManager;
-    private final QuerydslPagingItemReaderJobParameter jobParameter;
+    private final QuerydslZeroPagingItemReaderJobParameter jobParameter;
 
     private int chunkSize;
 
-    @Value("${chunkSize:100}")
+    @Value("${chunkSize:1000}")
     public void setChunkSize(int chunkSize) {
         this.chunkSize = chunkSize;
     }
 
     @Bean
     @JobScope
-    public QuerydslPagingItemReaderJobParameter jobParameter() {
-        return new QuerydslPagingItemReaderJobParameter();
+    public QuerydslZeroPagingItemReaderJobParameter jobParameter() {
+        return new QuerydslZeroPagingItemReaderJobParameter();
     }
 
     @Bean

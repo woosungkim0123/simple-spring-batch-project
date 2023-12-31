@@ -44,8 +44,8 @@ public class QuerydslPagingItemReaderConfiguration {
 
     @Bean
     @JobScope
-    public QuerydslZeroPagingItemReaderJobParameter jobParameter() {
-        return new QuerydslZeroPagingItemReaderJobParameter();
+    public QuerydslPagingItemReaderJobParameter jobParameter() {
+        return new QuerydslPagingItemReaderJobParameter();
     }
 
     @Bean
