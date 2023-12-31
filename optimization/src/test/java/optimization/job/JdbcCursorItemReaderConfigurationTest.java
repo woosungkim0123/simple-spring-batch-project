@@ -4,7 +4,9 @@ import optimization.domain.Product;
 import optimization.domain.ProductBackup;
 import optimization.domain.ProductBackupRepository;
 import optimization.domain.ProductRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -22,10 +24,10 @@ import static java.time.format.DateTimeFormatter.ofPattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@TestPropertySource(properties = "job.name=jdbcCoveringIndexPagingItemReaderBatchJob")
+@TestPropertySource(properties = "job.name=jdbcCursorItemReaderBatchJob")
 @SpringBootTest
 @SpringBatchTest
-class JdbcCoveringIndexPagingItemReaderConfigurationTest {
+class JdbcCursorItemReaderConfigurationTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
@@ -38,7 +40,7 @@ class JdbcCoveringIndexPagingItemReaderConfigurationTest {
 
     public static final DateTimeFormatter FORMATTER = ofPattern("yyyy-MM-dd");
 
-    @DisplayName("부분적으로 적용되는 커버링 인덱스 쿼리를 사용하기위해 JDBC Reader를 사용하여 배치가 정상적으로 실행된다.")
+    @DisplayName("JDBC Cursor Reader를 사용하여 배치가 정상적으로 실행된다.")
     @Test
     void batch_success_using_jdbc_reader_and_covering_index() throws Exception {
         // given
