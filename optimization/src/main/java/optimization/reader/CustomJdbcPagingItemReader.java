@@ -1,5 +1,7 @@
 package optimization.reader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,6 +25,7 @@ public class CustomJdbcPagingItemReader<T> implements ItemReader<T> {
     private int currentItemIndex;
     private List<T> items;
     private LocalDate date;
+    protected Log logger = LogFactory.getLog(getClass());
 
     public CustomJdbcPagingItemReader(DataSource dataSource, String query, RowMapper<T> rowMapper, int pageSize) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
@@ -39,6 +42,11 @@ public class CustomJdbcPagingItemReader<T> implements ItemReader<T> {
 
     @Override
     public T read() {
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("Reading page " + page);
+        }
+
         if (items == null || currentItemIndex >= items.size()) {
             fetchNextPage();
         }
