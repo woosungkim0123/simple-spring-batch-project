@@ -73,9 +73,9 @@ public class JdbcCoveringIndexPagingItemReaderConfiguration {
     @JobScope
     @Bean
     public CustomJdbcPagingItemReader<Product> reader() {
-        String query = "SELECT p.* FROM product p JOIN (SELECT id FROM product ORDER BY id ASC LIMIT :page, :pageSize) as temp on temp.id = p.id";
+        String query = "SELECT p.* FROM product p JOIN (SELECT id FROM product WHERE create_date = :date ORDER BY id ASC LIMIT :page, :pageSize) as temp on temp.id = p.id";
         CustomJdbcPagingItemReader<Product> reader = new CustomJdbcPagingItemReader<>(dataSource, query, new ProductRowMapper(), chunkSize);
-        //reader.setDate(jobParameter.getDate());
+        reader.setDate(jobParameter.getDate());
 
         return reader;
     }

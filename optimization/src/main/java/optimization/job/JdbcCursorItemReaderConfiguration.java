@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 
 /**
  * JDBC Cursor를 이용해서 데이터를 읽는 배치
@@ -76,9 +77,10 @@ public class JdbcCursorItemReaderConfiguration {
         return new JdbcCursorItemReaderBuilder<Product>()
                 .name("jdbcCursorItemReader")
                 .fetchSize(chunkSize)
-                .sql("SELECT * FROM product ORDER BY id ASC")
+                .sql("SELECT * FROM product WHERE create_date = ? ORDER BY id ASC")
                 .rowMapper(new ProductRowMapper())
                 .dataSource(dataSource)
+                .preparedStatementSetter(ps -> ps.setDate(1, Date.valueOf(jobParameter.getDate())))
                 .build();
     }
 
