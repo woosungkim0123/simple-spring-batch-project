@@ -36,6 +36,12 @@ public class QuerydslNoOffsetNumberOptions<T, N extends Number & Comparable<?>> 
         }
     }
 
+    /**
+     * 만들어지는 쿼리 예시
+     * select min(product.id)
+     * from Product product
+     * where product.createDate = ?1
+     */
     @Override
     protected void initFirstId(JPAQuery<T> query) {
         JPAQuery<T> clone = query.clone();
@@ -53,6 +59,12 @@ public class QuerydslNoOffsetNumberOptions<T, N extends Number & Comparable<?>> 
         }
     }
 
+    /**
+     * 만들어지는 쿼리 예시
+     * select max(product.id)
+     * from Product product
+     * where product.createDate = ?1
+     */
     @Override
     protected void initLastId(JPAQuery<T> query) {
         JPAQuery<T> clone = query.clone();
@@ -70,12 +82,18 @@ public class QuerydslNoOffsetNumberOptions<T, N extends Number & Comparable<?>> 
         }
     }
 
+    /**
+     * select product
+     * from Product product
+     * where product.createDate = ?1 and (product.id >= ?2 and product.id <= ?3)
+     * order by product.id asc
+     */
     @Override
     public JPAQuery<T> createQuery(JPAQuery<T> query, int page) {
         if(currentId == null) {
             return query;
         }
-
+        // whereExpression(page) => product.id >= 1 && product.id <= 1000000
         return query
                 .where(whereExpression(page))
                 .orderBy(orderExpression());
