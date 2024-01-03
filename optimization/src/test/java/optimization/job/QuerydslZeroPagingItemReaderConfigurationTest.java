@@ -38,9 +38,9 @@ class QuerydslZeroPagingItemReaderConfigurationTest {
 
     public static final DateTimeFormatter FORMATTER = ofPattern("yyyy-MM-dd");
 
-    @DisplayName("QuerydslZeroPagingItemReader 를 사용한 배치가 성공한다.")
+    @DisplayName("QuerydslZeroPagingItemReader를 사용한 배치가 성공한다. - offset을 0으로 유지")
     @Test
-    void batch_success_using_querydsl_reader() throws Exception {
+    void batch_success_using_zero_offset_querydsl_reader() throws Exception {
         // given
         LocalDate date = LocalDate.of(2023, 12, 23);
         LocalDate anotherDate = LocalDate.of(2023, 12, 24);

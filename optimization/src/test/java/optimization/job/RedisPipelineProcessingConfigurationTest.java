@@ -40,9 +40,9 @@ class RedisPipelineProcessingConfigurationTest {
 
     public static final DateTimeFormatter FORMATTER = ofPattern("yyyy-MM-dd");
 
-    @DisplayName("들어온 날짜보다 크거나 같은 날짜의 데이터를 Redis에 저장하고, 해당 날짜의 데이터를 합산하여 저장한다.")
+    @DisplayName("크거나 같은 날짜를 Redis Pipeline을 사용해 그룹화하여 합산하여 저장하고 그 내용을 RDBMS에 다시 저장한다.")
     @Test
-    void batch_success_using_jdbc_reader_and_covering_index() throws Exception {
+    void batch_success_using_redis_pipeline() throws Exception {
         // given
         LocalDate date1 = LocalDate.of(2023, 12, 23);
         LocalDate date2 = LocalDate.of(2023, 12, 24);

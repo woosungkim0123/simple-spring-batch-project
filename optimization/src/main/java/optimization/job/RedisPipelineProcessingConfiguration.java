@@ -34,7 +34,7 @@ import java.util.Set;
 
 /**
  * Redis PipeLine 이용해서 날짜별로 데이터를 합산하는 배치
- * 48s122ms
+ * 100만개 간단한 sum 요청: 48s122ms
  */
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "job.name", havingValue = RedisPipelineProcessingConfiguration.JOB_NAME)
@@ -99,21 +99,17 @@ public class RedisPipelineProcessingConfiguration {
     }
 
     /**
-     * Object: RedisCallback이 처리할 수 있는 데이터의 타입을 나타냅니다. 여기서는 파이프라인의 결과 타입이 명시적으로 중요하지 않기 때문에 Object를 사용합니다.
-     * 파이프라인 내에서 수행된 모든 작업에 대한 결과는 실제로는 중요하지 않으며 (executePipelined는 각 명령의 개별 결과를 반환하지 않음), 메서드 내부에서 null을 반환합니다.
+     * 파이프라인 내에서 수행된 모든 작업에 대한 결과는 실제로 중요하지 않아서 Object 사용(실제로 null 반환)
      */
     @Bean
     public ItemWriter<Product> redisItemWriter() {
-        return products -> {
-            stringRedisTemplate.executePipelined((RedisCallback<Object>) connection -> {
-                for (Product product : products) {
-                    String key = redisKeyPrefix + product.getCreateDate().toString();
-                    connection.stringCommands().incrBy(key.getBytes(), product.getAmount());
-                }
-                return null;
-            });
-        };
-
+        return products -> stringRedisTemplate.executePipelined((RedisCallback<Object>) connection -> {
+            for (Product product : products) {
+                String key = redisKeyPrefix + product.getCreateDate().toString();
+                connection.stringCommands().incrBy(key.getBytes(), product.getAmount());
+            }
+            return null;
+        });
     }
     
     @Bean
@@ -139,7 +135,6 @@ public class RedisPipelineProcessingConfiguration {
                                 .build();
                         entityManager.merge(backup);
                     }
-
                     transaction.commit();
                 } catch (Exception e) {
                     transaction.rollback();

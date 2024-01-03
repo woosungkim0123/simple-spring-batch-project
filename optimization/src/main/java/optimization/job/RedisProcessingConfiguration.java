@@ -32,7 +32,7 @@ import java.util.Set;
 
 /**
  * Redis를 이용해서 날짜별로 데이터를 합산하는 배치
- * 11m11s528ms
+ * 100만개 간단한 sum 요청: 11m11s528ms
  */
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "job.name", havingValue = RedisProcessingConfiguration.JOB_NAME)
